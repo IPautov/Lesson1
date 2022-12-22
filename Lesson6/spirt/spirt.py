@@ -10,7 +10,7 @@ try:
             try:
                 spirt.append(int(line))
                 f.close
-            except:
+            except ValueError:
                 print('Не соответствие формата данных. Не целые числа')
                 f.close
                 exit()
@@ -23,6 +23,7 @@ if spirt[0] < 0 or spirt[1] < 0 or spirt[2] < 0:
     exit()
 else:
     w = open('spirt_out.txt', 'w')
-    w.write(f'У Вас получится {min(spirt[0]//2,spirt[1]//6,spirt[2])} молекул спирта\n')
+    w.write(f'У Вас получится {min(spirt[0] // 2, spirt[1] // 6, spirt[2])} молекул спирта\n')
     w.close()
     print('Результат записан в файл spirt_out.txt')
+

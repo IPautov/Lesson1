@@ -1,60 +1,41 @@
 #!/usr/bin/python3
+def str_to_byte(list):
+    """Перевод строки в байт код
+
+    Принимает:
+        строку
+    Возвращает:
+        список байт кода
+
+    """
+
+    list_byte = []
+    for s in list:
+        for x in s:
+            list_byte.append(ord(x))
+    return list_byte
 
 def byte_to_str(list):
-    list_s = []
-    s = ''
-    for x in list:
-        list_s.append(chr(x))
-    s = ''.join(list_s)
-    return s
+    """Перевод байт кода в символы
 
-def byte_to_list(list):
+    Принимает:
+        Список байт кода
+    Возвращает:
+        Список символов
+
+    """
+
     list_s = []
-    s = ''
     for x in list:
         list_s.append(chr(x))
     return list_s
 
-def int_plus(x):
-    if x.isdigit():
-        if 0 < float(x) <= 1114111:
-            if float(x) * 10 % 10 == 0:
-                return True
-            else:
-                return False
-        else:
-            return False
-    else:
-        return False
+n = input('Введите Ваш текст:\n')
+string = []
+while n:
+    string.append(n)
+    n = input('Продолжите ввод или оставьте поле пустым что увидеть результат:\n')
 
-n = input('Введите целое число в диапазоне от 0 до 1114111 или список [x,y,z] таких чисел. Список может быть только один и введён первым:\n')
-l = []
+print('Введённым символам соответствуют следующий байт код:\n',str_to_byte(string),sep='')
+print('Результат выполнения обратной функции:\n',byte_to_str(str_to_byte(string)),sep='')
 
-try:
-    if isinstance(eval(n), list):
-        count = 0
-        for x in eval(n):
-            if int_plus(str(x)):
-                count += 1
-        if count == len(eval(n)):
-            l = eval(n)
-        else:
-            print('Список должен содержать только целые, положительные числа')
-            exit()
-except SyntaxError:
-    print('Ввод должен содержать только целые, положительные числа, а не знаки')
-    exit()
-except NameError:
-    print('Ввод должен содержать только целые, положительные числа, а не буквы')
-    exit()
-
-while int_plus(n) and n:
-    l.append(int(n))
-    n = input('Введите целое число в диапазоне от 0 до 1114111:\n')
-    if not int_plus(n):
-        print('Это не число в диапазоне от 0 до 1114111. Будет выведен результат')
-
-k = byte_to_str(l)
-m = byte_to_list(l)
-print('Вашим числам соответствуют следующие символы Юникода (строкой):\n',k,sep='')
-print('Вашим числам соответствуют следующие символы Юникода (списком):\n',m,sep='')
